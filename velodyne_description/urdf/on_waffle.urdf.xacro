@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="example">
+  <xacro:arg name="gpu" default="true"/>
+  <xacro:property name="gpu" value="$(arg gpu)" />
+  <xacro:arg name="organize_cloud" default="false"/>
+  <xacro:property name="organize_cloud" value="$(arg organize_cloud)" />
+
+  <xacro:include filename="$(find velodyne_description)/urdf/turtlebot3_description/urdf/turtlebot3_waffle.urdf.xacro"/>
+
+  <xacro:include filename="$(find velodyne_description)/urdf/VLP-16-IMU.urdf.xacro"/>
+  <xacro:VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" organize_cloud="${organize_cloud}" hz="10" samples="220" gpu="${gpu}">
+    <origin xyz="-0.05 0 0.2" rpy="0 0 0" />
+  </xacro:VLP-16>
+
+</robot>
